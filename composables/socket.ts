@@ -2,8 +2,9 @@
 
 export default function useSocket() {
   // Connect to the WebSocket endpoint
+  const config = useRuntimeConfig();
   const socket = ref<WebSocket | null>(null);
-  const baseUrl = 'ws://localhost:5000/api';
+  const baseUrl = config.public.websocketApiUrl;
 
   const connect = (path: string) => {
     const url = baseUrl + path;

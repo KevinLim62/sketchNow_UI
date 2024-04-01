@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full overflow-auto">
+  <div class="w-full">
     <div class="flex flex-col space-y-5">
       <div class="flex items-center justify-between">
         <UForm :validate="validate" :schema="schema" :state="state" class="flex flex-col items-start justify-start space-y-3" @submit="onSubmit">
           <UFormGroup label="User Name" name="name">
-            <UInput v-model="state.userName" :disabled="!!state.userName" />
+            <UInput v-model="state.userName" />
           </UFormGroup>
-          <UButton type="submit" :disabled="!!state.userName"> Confirm </UButton>
+          <UButton type="submit"> Confirm </UButton>
         </UForm>
         <div class="flex space-x-3">
           <UButton color="green" variant="outline" label="Open" trailing @click="isOpenCreateBoard = true"><Icon name="material-symbols-light:add-ad-outline-rounded" size="25" color="green" />New board</UButton>
@@ -31,10 +31,11 @@
 <script setup lang="ts">
 import { z } from 'zod';
 import type { FormSubmitEvent, FormError } from '#ui/types';
+const config = useRuntimeConfig();
 
 const isOpenCreateBoard = ref(false);
 const toast = useToast();
-const { pending, data: boardRooms } = await useFetch('http://localhost:5000/api/boardRoom', {
+const { pending, data: boardRooms } = await useFetch(`${config.public.apiUrl}/boardRoom`, {
   method: 'get',
   lazy: true,
 });

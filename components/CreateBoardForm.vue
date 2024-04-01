@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { z } from 'zod';
 import type { FormSubmitEvent, FormError } from '#ui/types';
-
+const config = useRuntimeConfig();
 const toast = useToast();
 const schema = z.object({
   boardName: z.string().min(5),
@@ -39,7 +39,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     name: event.data.boardName,
   });
 
-  const { error } = await useFetch('http://localhost:5000/api/boardRoom', {
+  const { error } = await useFetch(`${config.public.apiUrl}/boardRoom`, {
     method: 'post',
     body: payload,
   });
