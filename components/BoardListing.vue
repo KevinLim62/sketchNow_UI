@@ -22,7 +22,7 @@ const router = useRouter();
 const toast = useToast();
 const checkUserExist = (boardId: string) => {
   const userSession = localStorage.getItem('userSession');
-  console.log(userSession);
+
   if (userSession && JSON.parse(userSession)['name'] !== undefined) {
     router.push(`/board/${boardId}`);
   } else {

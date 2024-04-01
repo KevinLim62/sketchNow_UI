@@ -122,9 +122,9 @@ onMounted(() => {
   });
 });
 
-// onUnmounted(() => {
-//   disconnect();
-// });
+onUnmounted(() => {
+  disconnect();
+});
 
 watch(selectedTool, (val, oldVal) => {
   switch (val) {
@@ -162,7 +162,7 @@ watch(selectedTool, (val, oldVal) => {
 
       stage?.on('mouseup touchend', (e) => {
         isRectDrawing = false;
-        userShapes.push(rect);
+        //userShapes.push(rect);
         selectedTool.value = 'pointer';
       });
       break;
@@ -201,7 +201,7 @@ watch(selectedTool, (val, oldVal) => {
 
       stage?.on('mouseup touchend', (e) => {
         isCircleDrawing = false;
-        userShapes.push(circle);
+        //userShapes.push(circle);
         selectedTool.value = 'pointer';
       });
 
@@ -288,11 +288,11 @@ const drawLine = (layer: Layer | null, xPos: number, yPos: number) => {
     lineJoin: 'round',
     tension: 1,
   });
-  console.log(line);
+
   // Add the new line to the layer
   layer?.add(line);
   layer?.batchDraw();
-  userShapes.push(line);
+  //userShapes.push(line);
 };
 
 const drawRect = (startX: number, startY: number) => {
